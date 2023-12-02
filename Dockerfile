@@ -1,3 +1,3 @@
-FROM ghcr.io/lielongxingkong/chainsaid-gpt-on-wechat:latest
+FROM ghcr.io/lielongxingkong/chainsaid-gpt-on-wechat:main
 
 ENTRYPOINT ["/entrypoint.sh"]
