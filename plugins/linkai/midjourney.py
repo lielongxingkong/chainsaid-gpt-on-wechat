@@ -208,11 +208,13 @@ class MJBot:
                     time_str = "1~10分钟"
                 else:
                     time_str = "1分钟"
-                content = f"🚀您的作品将在{time_str}左右完成，请耐心等待\n- - - - - - - - -\n"
-                if real_prompt:
-                    content += f"初始prompt: {prompt}\n转换后prompt: {real_prompt}"
-                else:
-                    content += f"prompt: {prompt}"
+                content = f"🚀您的作品将在{time_str}左右完成，请耐心等待"
+                if not self.config["hide_info"]:
+                    content += f"\n- - - - - - - - -\n"
+                    if real_prompt:
+                        content += f"初始prompt: {prompt}\n转换后prompt: {real_prompt}"
+                    else:
+                        content += f"prompt: {prompt}"
                 reply = Reply(ReplyType.INFO, content)
                 task = MJTask(id=task_id, status=Status.PENDING, raw_prompt=prompt, user_id=user_id,
                               task_type=TaskType.GENERATE)
@@ -322,14 +324,15 @@ class MJBot:
         if task.task_type == TaskType.GENERATE or task.task_type == TaskType.VARIATION or task.task_type == TaskType.RESET:
             text = f"🎨绘画完成!\n"
             if task.raw_prompt:
-                text += f"prompt: {task.raw_prompt}\n"
-            text += f"- - - - - - - - -\n图片ID: {task.img_id}"
-            text += f"\n\n🔎使用 {trigger_prefix}mju 命令放大图片\n"
-            text += f"例如：\n{trigger_prefix}mju {task.img_id} 1"
-            text += f"\n\n🪄使用 {trigger_prefix}mjv 命令变换图片\n"
-            text += f"例如：\n{trigger_prefix}mjv {task.img_id} 1"
-            text += f"\n\n🔄使用 {trigger_prefix}mjr 命令重新生成图片\n"
-            text += f"例如：\n{trigger_prefix}mjr {task.img_id}"
+                text += f"prompt: {task.raw_prompt}"
+            if not self.config["hide_info"]:
+                text += f"\n- - - - - - - - -\n图片ID: {task.img_id}"
+                text += f"\n\n🔎使用 {trigger_prefix}mju 命令放大图片\n"
+                text += f"例如：\n{trigger_prefix}mju {task.img_id} 1"
+                text += f"\n\n🪄使用 {trigger_prefix}mjv 命令变换图片\n"
+                text += f"例如：\n{trigger_prefix}mjv {task.img_id} 1"
+                text += f"\n\n🔄使用 {trigger_prefix}mjr 命令重新生成图片\n"
+                text += f"例如：\n{trigger_prefix}mjr {task.img_id}"
             reply = Reply(ReplyType.INFO, text)
             _send(channel, reply, e_context["context"])
 
