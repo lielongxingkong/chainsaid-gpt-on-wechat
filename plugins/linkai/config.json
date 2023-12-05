@@ -12,7 +12,7 @@
         "use_image_create_prefix": true
     },
     "summary": {
-        "enabled": false,
+        "enabled": true,
         "group_enabled": true,
         "max_file_size": 5000,
         "type": ["FILE", "SHARING"]
