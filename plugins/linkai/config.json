@@ -1,7 +1,8 @@
 {
     "group_app_map": {
-        "测试群名1": "default",
-        "🌍水星漫谈读书会 Fun Club": "xQVC1zG9"
+        "🌍水星漫谈读书会 Fun Club": "xQVC1zG9",
+        "🌖水星漫谈读书会Fun Club 3": "xQVC1zG9",
+        "ChatGPT测试群": "default"
     },
     "midjourney": {
         "enabled": true,
